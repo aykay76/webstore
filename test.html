@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Testing web storage</title>
+	</head>
+	<body>
+		<p id="persistent">Grab value from local storage</p>
+		<input type="text" value="Enter value to place in local storage" id="thevalue" />
+		<input type="button" id="setit" value="Set It!" />
+		<input type="button" id="clear" value="Clear" />
+
+		<script type="text/javascript">
+			let p = document.querySelector("#persistent");
+			
+			if (window.localStorage)
+			{
+				p.textContent = localStorage.getItem('testitem');
+			}
+			else
+			{
+				document.querySelectorAll('input').forEach((i)=> {i.enabled = false })
+			}
+
+			document.querySelectorAll('input#clear')[0].addEventListener('click', (el,me)=>{
+				window.localStorage.clear();
+				p.textContent = '';
+			});
+
+			document.querySelector('input#setit').addEventListener('click', ()=>{
+				let val = document.querySelector('#thevalue').value
+				window.localStorage.setItem('testitem', val);
+				p.textContent = val;
+			});
+		</script>
+	</body>
+</html>
